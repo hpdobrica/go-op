@@ -21,8 +21,7 @@ COPY . .
 RUN go get -d -v
 RUN go build -o /go/bin/app
 
-FROM scratch
-# FROM alpine:3.12
+FROM alpine:3.12
 
 COPY --from=build /usr/bin/op /usr/bin/
 COPY --from=build /go/bin/app /go/bin/app
