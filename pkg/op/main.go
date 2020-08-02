@@ -21,25 +21,30 @@ func Signin(domain, email, secretKey, masterPassword string) error {
 
 	token, err := executor.Run(fmt.Sprintf("echo %s | op signin %s %s %s --raw", masterPassword, domain, email, secretKey))
 
-	os.Setenv("OP_SESSION_my", token)
+	os.Setenv("OP_SESSION", token)
 
 	return err
 }
 
-func ListItems(vault string) (string, error) {
-	token := os.Getenv("OP_SESSION_my")
-	out, err := executor.Run(fmt.Sprintf("op list items --vault %s --session %s", vault, token))
+func ListItems(vault string) ([]Item, error) {
+	flags := make(map[string]string)
+
+	if vault != "" {
+		flags["vault"] = vault
+	}
+
+	out, err := executor.RunOp("op list items", flags)
 
 	if err != nil {
-		return "", err
+		return nil, err
 	}
 
 	var items []Item
 	errJson := json.Unmarshal([]byte(out), &items)
 
-	fmt.Println(errJson)
+	if errJson != nil {
+		return nil, errJson
+	}
 
-	fmt.Println(fmt.Sprintf("json parsed %s", PrettyPrint(items)))
-
-	return out, nil
+	return items, nil
 }

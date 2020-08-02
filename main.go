@@ -8,9 +8,11 @@ import (
 )
 
 func main() {
+	signinAddr := os.Getenv("OP_SIGNIN_ADDRESS")
+	email := os.Getenv("OP_EMAIL")
 	secretKey := os.Getenv("OP_SECRET_KEY")
 	masterPass := os.Getenv("OP_MASTER_PASSWORD")
-	signinErr := op.Signin("my.1password.com", "hpdobrica@gmail.com", secretKey, masterPass)
+	signinErr := op.Signin(signinAddr, email, secretKey, masterPass)
 
 	if signinErr != nil {
 		fmt.Println(signinErr)
@@ -19,9 +21,14 @@ func main() {
 
 	fmt.Println("successfully initialized op")
 
-	_, err := op.ListItems("Private")
+	items, err := op.ListItems("Private")
 
-	// fmt.Println(out)
-	fmt.Println(err)
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	for _, item := range items {
+		fmt.Println(item.Overview.Title)
+	}
 
 }

@@ -12,7 +12,9 @@ var OP_CLI_VERSION = "1.3.0"
 
 func checkOpCliVersion(executor IExecutor) (bool, error) {
 
-	out, err := executor.Run("op --version")
+	flags := make(map[string]string)
+	flags["version"] = ""
+	out, err := executor.RunOp("op", flags)
 
 	if err != nil {
 		return false, fmt.Errorf("Error getting op version: %s", err)
