@@ -9,10 +9,10 @@ type Item struct {
 	ChangerUuid  string       `json:"changerUuid,omitempty"`
 	ItemVersion  int          `json:"itemVersion,omitempty"`
 	VaultUuid    string       `json:"vaultUuid,omitempty"`
-	Overview     ItemOverview `json:"overview,omitempty"`
+	Overview     itemOverview `json:"overview,omitempty"`
 }
 
-type ItemOverview struct {
+type itemOverview struct {
 	URLs []struct {
 		L string `json:"l,omitempty"`
 		U string `json:"u,omitempty"`
@@ -29,4 +29,24 @@ type ItemOverview struct {
 	Tags  []string `json:"tags"`
 	Title string   `json:"title,omitempty"`
 	Url   string   `json:"url,omitempty"`
+}
+
+type ItemWithDetails struct {
+	Item
+	Details itemDetails
+}
+
+type itemDetails struct {
+	Fields []struct {
+		Designation string `json:"designation,omitempty"`
+		Name        string `json:"name,omitempty"`
+		Type        string `json:"type,omitempty"`
+		Value       string `json:"value,omitempty"`
+	} `json:"fields"`
+	NotesPlain      string `json:"notesPlain"`
+	PasswordHistory []struct {
+		Time  int    `json:"time"`
+		Value string `json:"value"`
+	}
+	// Sections []struct{} `json:"sections"` // TODO parsing of sections
 }

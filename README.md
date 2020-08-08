@@ -6,3 +6,14 @@ Goals of the project:
 - Mimic 1Password CLI API as closely as possible
 - Provide fully typed responses from the 1Password CLI 
 - Make quality of life improvements (e.g. refreshing sessions)
+
+
+Expected environment variables:
+
+```
+OP_DEVICE
+OP_SIGNIN_ADDRESS
+OP_EMAIL
+OP_SECRET_KEY
+OP_MASTER_PASSWORD
+```

@@ -62,10 +62,6 @@ func ExampleGetItem() {
 		fmt.Println(err)
 	}
 
-	fmt.Println(item)
-
-	// for _, tpl := range templates {
-	// 	fmt.Println(tpl.Name)
-	// }
+	fmt.Println(item.Details.Fields[0].Value)
 
 }

@@ -1,23 +1,25 @@
 package op
 
 import (
+	"encoding/json"
 	"fmt"
 )
 
-func GetItem(itemId string) (string, error) {
+func GetItem(itemId string) (ItemWithDetails, error) {
 
 	out, err := executor.RunOp(fmt.Sprintf("op get item %s", itemId), nil)
 
+	var item ItemWithDetails
+
 	if err != nil {
-		return "", err
+		return item, err
 	}
 
-	// var items []Item
-	// errJson := json.Unmarshal([]byte(out), &items)
+	errJson := json.Unmarshal([]byte(out), &item)
 
-	// if errJson != nil {
-	// 	return "", errJson
-	// }
+	if errJson != nil {
+		return item, errJson
+	}
 
-	return out, nil
+	return item, nil
 }
