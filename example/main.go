@@ -24,16 +24,16 @@ func main() {
 
 	fmt.Println("successfully initialized op")
 
-	// ExampleListItems()
-	// ExampleGetItem()
+	// exampleListItems()
+	// exampleGetItem()
 
-	// ExampleListTemplates()
+	// exampleListTemplates()
 
-	ExampleListVaults()
+	exampleListVaults()
 
 }
 
-func ExampleListItems() {
+func exampleListItems() {
 	items, err := op.ListItems(testVault)
 
 	if err != nil {
@@ -45,7 +45,7 @@ func ExampleListItems() {
 	}
 }
 
-func ExampleListTemplates() {
+func exampleListTemplates() {
 	templates, err := op.ListTemplates()
 
 	if err != nil {
@@ -58,7 +58,7 @@ func ExampleListTemplates() {
 
 }
 
-func ExampleGetItem() {
+func exampleGetItem() {
 	items, _ := op.ListItems(testVault)
 
 	item, err := op.GetItem(items[0].Uuid)
@@ -71,7 +71,7 @@ func ExampleGetItem() {
 
 }
 
-func ExampleListVaults() {
+func exampleListVaults() {
 	vaults, err := op.ListVaults()
 
 	if err != nil {
