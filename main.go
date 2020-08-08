@@ -15,6 +15,7 @@ func main() {
 	signinErr := op.Signin(signinAddr, email, secretKey, masterPass)
 
 	if signinErr != nil {
+		fmt.Println("error while signing in")
 		fmt.Println(signinErr)
 		os.Exit(1)
 	}

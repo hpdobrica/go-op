@@ -7,7 +7,7 @@ type Item struct {
 	CreatedAt    string       `json:"createdAt,omitempty"`
 	UpdatedAt    string       `json:"updatedAt,omitempty"`
 	ChangerUuid  string       `json:"changerUuid,omitempty"`
-	ItemVersion  int          `json:"itemVersion,omitempty`
+	ItemVersion  int          `json:"itemVersion,omitempty"`
 	VaultUuid    string       `json:"vaultUuid,omitempty"`
 	Overview     ItemOverview `json:"overview,omitempty"`
 }
@@ -16,7 +16,7 @@ type ItemOverview struct {
 	URLs []struct {
 		L string `json:"l,omitempty"`
 		U string `json:"u,omitempty"`
-	} `"json:URLs"`
+	} `json:"URLs"`
 	Ainfo  string `json:"ainfo,omitempty"`
 	Appids []struct {
 		Id   string `json:"id,omitempty"`

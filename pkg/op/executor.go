@@ -21,11 +21,11 @@ func (r Executor) Run(command string) (string, error) {
 
 	result := strings.TrimSuffix(string(out), "\n")
 
-	// fmt.Println(fmt.Sprintf("command: %q", command))
-	// fmt.Println(fmt.Sprintf("result: %q", result))
-	// fmt.Println(fmt.Sprintf("err: %q", err))
+	if err != nil {
+		return "", errors.New(result)
+	}
 
-	return result, err
+	return result, nil
 }
 
 func (r Executor) RunOp(command string, flags map[string]string) (string, error) {
