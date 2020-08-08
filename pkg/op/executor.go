@@ -29,6 +29,10 @@ func (r Executor) Run(command string) (string, error) {
 }
 
 func (r Executor) RunOp(command string, flags map[string]string) (string, error) {
+	if flags == nil {
+		flags = make(map[string]string)
+	}
+
 	token := os.Getenv("OP_SESSION")
 
 	if token != "" {

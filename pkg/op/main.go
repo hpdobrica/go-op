@@ -1,7 +1,6 @@
 package op
 
 import (
-	"encoding/json"
 	"errors"
 	"fmt"
 	"os"
@@ -24,27 +23,4 @@ func Signin(domain, email, secretKey, masterPassword string) error {
 	os.Setenv("OP_SESSION", token)
 
 	return err
-}
-
-func ListItems(vault string) ([]Item, error) {
-	flags := make(map[string]string)
-
-	if vault != "" {
-		flags["vault"] = vault
-	}
-
-	out, err := executor.RunOp("op list items", flags)
-
-	if err != nil {
-		return nil, err
-	}
-
-	var items []Item
-	errJson := json.Unmarshal([]byte(out), &items)
-
-	if errJson != nil {
-		return nil, errJson
-	}
-
-	return items, nil
 }

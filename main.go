@@ -21,6 +21,13 @@ func main() {
 
 	fmt.Println("successfully initialized op")
 
+	// ExampleListItems()
+	// ExampleListTemplates()
+	ExampleGetItem()
+
+}
+
+func ExampleListItems() {
 	items, err := op.ListItems("Private")
 
 	if err != nil {
@@ -30,5 +37,34 @@ func main() {
 	for _, item := range items {
 		fmt.Println(item.Overview.Title)
 	}
+}
+
+func ExampleListTemplates() {
+	templates, err := op.ListTemplates()
+
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	for _, tpl := range templates {
+		fmt.Println(tpl.Name)
+	}
+
+}
+
+func ExampleGetItem() {
+	items, _ := op.ListItems("Private")
+
+	item, err := op.GetItem(items[0].Uuid)
+
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	fmt.Println(item)
+
+	// for _, tpl := range templates {
+	// 	fmt.Println(tpl.Name)
+	// }
 
 }
