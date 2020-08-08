@@ -1,4 +1,4 @@
-module github.com/hpdobrica/op
+module github.com/hpdobrica/go-op
 
 go 1.14
 
