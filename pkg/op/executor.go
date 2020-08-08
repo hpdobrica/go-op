@@ -55,7 +55,7 @@ func buildOpCommand(command string, flags map[string]string) string {
 	result.WriteString(command)
 
 	for k, v := range flags {
-		result.WriteString(fmt.Sprintf(" --%s %s", k, v))
+		result.WriteString(fmt.Sprintf(" --%s %q", k, v))
 	}
 
 	return result.String()

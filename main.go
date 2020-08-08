@@ -7,6 +7,8 @@ import (
 	"github.com/hpdobrica/op/pkg/op"
 )
 
+var testVault string = "Sandbox"
+
 func main() {
 	signinAddr := os.Getenv("OP_SIGNIN_ADDRESS")
 	email := os.Getenv("OP_EMAIL")
@@ -23,13 +25,16 @@ func main() {
 	fmt.Println("successfully initialized op")
 
 	// ExampleListItems()
+	// ExampleGetItem()
+
 	// ExampleListTemplates()
-	ExampleGetItem()
+
+	ExampleListVaults()
 
 }
 
 func ExampleListItems() {
-	items, err := op.ListItems("Private")
+	items, err := op.ListItems(testVault)
 
 	if err != nil {
 		fmt.Println(err)
@@ -54,7 +59,7 @@ func ExampleListTemplates() {
 }
 
 func ExampleGetItem() {
-	items, _ := op.ListItems("Private")
+	items, _ := op.ListItems(testVault)
 
 	item, err := op.GetItem(items[0].Uuid)
 
@@ -63,5 +68,18 @@ func ExampleGetItem() {
 	}
 
 	fmt.Println(item.Details.Fields[0].Value)
+
+}
+
+func ExampleListVaults() {
+	vaults, err := op.ListVaults()
+
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	for _, vault := range vaults {
+		fmt.Println(vault.Name)
+	}
 
 }

@@ -41,3 +41,20 @@ func ListTemplates() ([]Template, error) {
 
 	return templates, nil
 }
+
+func ListVaults() ([]Vault, error) {
+	out, err := executor.RunOp("op list vaults", nil)
+
+	if err != nil {
+		return nil, err
+	}
+
+	var vaults []Vault
+	errJson := json.Unmarshal([]byte(out), &vaults)
+
+	if errJson != nil {
+		return nil, errJson
+	}
+
+	return vaults, nil
+}
