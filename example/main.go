@@ -2,14 +2,21 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"os"
 
 	"github.com/hpdobrica/go-op"
+	"github.com/joho/godotenv"
 )
 
 var testVault string = "Sandbox"
 
 func main() {
+	err := godotenv.Load()
+	if err != nil {
+		log.Fatal("Error loading .env file")
+	}
+
 	signinAddr := os.Getenv("OP_SIGNIN_ADDRESS")
 	email := os.Getenv("OP_EMAIL")
 	secretKey := os.Getenv("OP_SECRET_KEY")
