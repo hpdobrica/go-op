@@ -5,9 +5,10 @@ import (
 	"fmt"
 )
 
-func GetItem(itemId string) (ItemWithDetails, error) {
+// GetItem : Gets an item with details
+func (o Op) GetItem(itemID string) (ItemWithDetails, error) {
 
-	out, err := executor.RunOp(fmt.Sprintf("op get item %s", itemId), nil)
+	out, err := o.executor.RunOp(fmt.Sprintf("op get item %s", itemID), nil)
 
 	var item ItemWithDetails
 
@@ -15,10 +16,10 @@ func GetItem(itemId string) (ItemWithDetails, error) {
 		return item, err
 	}
 
-	errJson := json.Unmarshal([]byte(out), &item)
+	errJSON := json.Unmarshal([]byte(out), &item)
 
-	if errJson != nil {
-		return item, errJson
+	if errJSON != nil {
+		return item, errJSON
 	}
 
 	return item, nil

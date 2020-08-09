@@ -17,11 +17,13 @@ func main() {
 		log.Fatal("Error loading .env file")
 	}
 
+	opcli := op.New()
+
 	signinAddr := os.Getenv("OP_SIGNIN_ADDRESS")
 	email := os.Getenv("OP_EMAIL")
 	secretKey := os.Getenv("OP_SECRET_KEY")
 	masterPass := os.Getenv("OP_MASTER_PASSWORD")
-	signinErr := op.Signin(signinAddr, email, secretKey, masterPass)
+	signinErr := opcli.Signin(signinAddr, email, secretKey, masterPass)
 
 	if signinErr != nil {
 		fmt.Println("error while signing in")
@@ -31,16 +33,16 @@ func main() {
 
 	fmt.Println("successfully initialized op")
 
-	// exampleListItems()
-	// exampleGetItem()
+	// exampleListItems(opcli)
+	// exampleGetItem(opcli)
 
-	// exampleListTemplates()
+	// exampleListTemplates(opcli)
 
-	exampleListVaults()
+	exampleListVaults(opcli)
 
 }
 
-func exampleListItems() {
+func exampleListItems(op op.Op) {
 	items, err := op.ListItems(testVault)
 
 	if err != nil {
@@ -52,7 +54,7 @@ func exampleListItems() {
 	}
 }
 
-func exampleListTemplates() {
+func exampleListTemplates(op op.Op) {
 	templates, err := op.ListTemplates()
 
 	if err != nil {
@@ -65,7 +67,7 @@ func exampleListTemplates() {
 
 }
 
-func exampleGetItem() {
+func exampleGetItem(op op.Op) {
 	items, _ := op.ListItems(testVault)
 
 	item, err := op.GetItem(items[0].Uuid)
@@ -78,7 +80,7 @@ func exampleGetItem() {
 
 }
 
-func exampleListVaults() {
+func exampleListVaults(op op.Op) {
 	vaults, err := op.ListVaults()
 
 	if err != nil {

@@ -2,58 +2,61 @@ package op
 
 import "encoding/json"
 
-func ListItems(vault string) ([]Item, error) {
+// ListItems : gets a list of items in a vault without details
+func (o Op) ListItems(vault string) ([]Item, error) {
 	flags := make(map[string]string)
 
 	if vault != "" {
 		flags["vault"] = vault
 	}
 
-	out, err := executor.RunOp("op list items", flags)
+	out, err := o.executor.RunOp("op list items", flags)
 
 	if err != nil {
 		return nil, err
 	}
 
 	var items []Item
-	errJson := json.Unmarshal([]byte(out), &items)
+	errJSON := json.Unmarshal([]byte(out), &items)
 
-	if errJson != nil {
-		return nil, errJson
+	if errJSON != nil {
+		return nil, errJSON
 	}
 
 	return items, nil
 }
 
-func ListTemplates() ([]Template, error) {
-	out, err := executor.RunOp("op list templates", nil)
+// ListTemplates : gets a list of templates
+func (o Op) ListTemplates() ([]Template, error) {
+	out, err := o.executor.RunOp("op list templates", nil)
 
 	if err != nil {
 		return nil, err
 	}
 
 	var templates []Template
-	errJson := json.Unmarshal([]byte(out), &templates)
+	errJSON := json.Unmarshal([]byte(out), &templates)
 
-	if errJson != nil {
-		return nil, errJson
+	if errJSON != nil {
+		return nil, errJSON
 	}
 
 	return templates, nil
 }
 
-func ListVaults() ([]Vault, error) {
-	out, err := executor.RunOp("op list vaults", nil)
+// ListVaults : gets a list of vaults
+func (o Op) ListVaults() ([]Vault, error) {
+	out, err := o.executor.RunOp("op list vaults", nil)
 
 	if err != nil {
 		return nil, err
 	}
 
 	var vaults []Vault
-	errJson := json.Unmarshal([]byte(out), &vaults)
+	errJSON := json.Unmarshal([]byte(out), &vaults)
 
-	if errJson != nil {
-		return nil, errJson
+	if errJSON != nil {
+		return nil, errJSON
 	}
 
 	return vaults, nil

@@ -8,13 +8,13 @@ import (
 	"github.com/coreos/go-semver/semver"
 )
 
-var OP_CLI_VERSION = "1.3.0"
+var minOpCliVersion = "1.3.0"
 
-func checkOpCliVersion(executor IExecutor) (bool, error) {
+func (o Op) checkOpCliVersion() (bool, error) {
 
 	flags := make(map[string]string)
 	flags["version"] = ""
-	out, err := executor.RunOp("op", flags)
+	out, err := o.executor.RunOp("op", flags)
 
 	if err != nil {
 		return false, fmt.Errorf("Error getting op version: %s", err)
@@ -22,7 +22,7 @@ func checkOpCliVersion(executor IExecutor) (bool, error) {
 
 	currentVersion := semver.New(strings.TrimSuffix(string(out), "\n"))
 
-	requiredVersion := semver.New(OP_CLI_VERSION)
+	requiredVersion := semver.New(minOpCliVersion)
 
 	if currentVersion.LessThan(*requiredVersion) {
 		return false, nil
@@ -31,7 +31,7 @@ func checkOpCliVersion(executor IExecutor) (bool, error) {
 	return true, nil
 }
 
-func PrettyPrint(i interface{}) string {
+func prettyPrint(i interface{}) string {
 	s, _ := json.MarshalIndent(i, "", "\t")
 	return string(s)
 }
