@@ -10,6 +10,8 @@ import (
 
 var minOpCliVersion = "1.3.0"
 
+// TODO custom error types?
+
 func (o Op) checkOpCliVersion() (bool, error) {
 
 	flags := make(map[string]string)
